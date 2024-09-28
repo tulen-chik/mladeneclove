@@ -1,0 +1,24 @@
+.projects-scroller {
+    position: relative;
+    overflow: hidden; /* Hide overflow to prevent scrollbars */
+}
+
+.scroller-wrapper {
+    position: absolute; /* Stack elements above one another */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroller-wrapper.hidden {
+    opacity: 0; /* Hidden state with zero opacity */
+    visibility: hidden; /* Ensure it does not affect layout */
+}
+
+.scroller-wrapper.visible {
+    opacity: 1; /* Active component visible */
+    visibility: visible; /* Ensure it can interact */
+    z-index: 10; /* Bring the active element in front */
+}

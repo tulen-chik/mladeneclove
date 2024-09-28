@@ -1,0 +1,85 @@
+.main {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Make the section take up the entire viewport height */
+    overflow: hidden;
+}
+
+.backgroundContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Background is at the back */
+}
+
+.background {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    position: relative;
+    z-index: 2; /* Content is above the background */
+    color: white; /* Set the text color to white for better contrast */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    backdrop-filter: blur(5px); /* Optional: Adds a blur effect behind the text */
+}
+
+.title {
+    font-size: 5rem;
+    margin: 0;
+}
+
+.description {
+    font-size: 3rem;
+    margin-top: 1rem;
+    max-width: 800px;
+}
+
+@keyframes rainbow {
+    0% {
+        color: white;
+    }
+    14% {
+        color: orange;
+    }
+    28% {
+        color: yellow;
+    }
+    42% {
+        color: green;
+    }
+    57% {
+        color: blue;
+    }
+    71% {
+        color: indigo;
+    }
+    85% {
+        color: violet;
+    }
+    100% {
+        color: red;
+    }
+}
+
+
+.text {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Apply shadow to text */
+    transition: color 4s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.text:hover {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Example hover effect */
+    animation: rainbow 4s linear infinite;
+}

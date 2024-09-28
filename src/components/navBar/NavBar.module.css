@@ -1,0 +1,57 @@
+.main {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    height: 50px;
+    width: 100%;
+    z-index: 10;
+}
+.right, .left {
+    display: flex;
+    justify-content: space-evenly;
+    color: white;
+    font-size: 25px;
+    width: 50%;
+    cursor: pointer;
+    align-items: center;
+}
+
+@keyframes rainbow {
+    0% {
+        color: white;
+    }
+    14% {
+        color: orange;
+    }
+    28% {
+        color: yellow;
+    }
+    42% {
+        color: green;
+    }
+    57% {
+        color: blue;
+    }
+    71% {
+        color: indigo;
+    }
+    85% {
+        color: violet;
+    }
+    100% {
+        color: red;
+    }
+}
+
+.main a {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Apply shadow to text */
+    transition: color 4s ease;
+    text-decoration: none;
+}
+
+.main a:hover {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Example hover effect */
+    animation: rainbow 4s linear infinite;
+}
+
