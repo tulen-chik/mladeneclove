@@ -15,5 +15,6 @@ export interface ScrollerElementProps {
 export interface Payload {
     email: string,
     id: number,
+    roleId: number,
     isActivated: boolean,
 }

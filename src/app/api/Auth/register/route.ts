@@ -1,11 +1,11 @@
 import { sql } from '@vercel/postgres';
-import { NextResponse } from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 import bcrypt from 'bcrypt';
 import {v4} from 'uuid';
 import MailService from "@/services/mailService";
 import TokenService from "@/services/tokenService";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const { email, password } = await request.json();
         const role: string = "User";
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         `;
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/Auth/activate/${activationLink}`);
         const newUser = result.rows[0];
-        const token = TokenService.generateToken({email: newUser.email, isActivated: newUser.isactivated, id: newUser.id});
+        const token = TokenService.generateToken({roleId: newUser.role_id, email: newUser.email, isActivated: newUser.isactivated, id: newUser.id});
         await TokenService.saveToken(newUser.id, token.refreshToken)
         return NextResponse.json({ success: 'User registered successfully', ...token }, { status: 201, headers: {"Set-cookie": `refreshToken=${token.refreshToken}; sameSite=strict; httpOnly=true; maxAge=60*60*24`} });
     } catch (error: unknown) {

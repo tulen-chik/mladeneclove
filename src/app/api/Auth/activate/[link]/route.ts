@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 import TokenService from "@/services/tokenService";
 
-export async function GET(request: Request, response: Response) {
+export async function GET(request: Request) {
     try {
         // Extract the activation link from the URL
         const url = new URL(request.url);
@@ -20,7 +20,7 @@ export async function GET(request: Request, response: Response) {
         const newUser = await sql`SELECT * FROM Users WHERE ActivationLink = ${activationLink}`;
         const newUserData = newUser.rows[0];
 
-        const token = TokenService.generateToken({email: newUserData.email, isActivated: newUserData.isactivated, id: newUserData.id});
+        const token = TokenService.generateToken({roleId: newUserData.role_id, email: newUserData.email, isActivated: newUserData.isactivated, id: newUserData.id});
         await TokenService.saveToken(newUserData.id, token.refreshToken)
 
         return NextResponse.redirect(String(process.env.API_URL), {headers: {"Set-cookie": `refreshToken=${token.refreshToken}; sameSite=strict; httpOnly=true; maxAge=60*60*24`}});
